@@ -32,11 +32,6 @@ export default function ThirdSlide() {
                 $link: 'https://etherscamdb.info/'
               })}
             </li>
-            <li>
-              {translate('ONBOARDING_TEXT_24', {
-                $link: 'https://download.mycrypto.com/'
-              })}
-            </li>
           </ul>
         </section>
         <OnboardingButton />
