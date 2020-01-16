@@ -1,6 +1,6 @@
 {
-  "name": "MyCrypto",
-  "author": "MyCryptoHQ",
+  "name": "MintMeCoinWallet",
+  "author": "abchosting",
   "version": "1.7.4",
   "main": "main.js",
   "description": "MyCrypto is a free, open-source interface for interacting with the blockchain",

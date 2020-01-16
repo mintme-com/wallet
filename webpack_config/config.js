@@ -15,7 +15,7 @@ const paths = {
 module.exports = {
   // Configuration
   port: 3000,
-  title: 'MyCrypto',
+  title: 'MintMe Coin Wallet',
   // description < 200 characters
   description: 'MyCrypto is a free, open-source interface for interacting with the blockchain.',
   url: 'https://mycrypto.com/',

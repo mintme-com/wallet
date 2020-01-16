@@ -42,7 +42,7 @@ async function build() {
       ia32: true,
       config: {
         appId: 'com.github.mycrypto.mycryptohq',
-        productName: 'MyCrypto',
+        productName: 'MintMe Coin Wallet',
         directories: {
           app: jsBuildDir,
           output: electronBuildsDir
