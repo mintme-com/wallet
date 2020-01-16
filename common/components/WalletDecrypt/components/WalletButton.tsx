@@ -62,11 +62,11 @@ export class WalletButton extends React.PureComponent<Props> {
           arialabel: 'Secure wallet type'
         });
       } else {
-        icons.push({
-          icon: 'exclamation-triangle',
-          tooltip: translateRaw('TOOLTIP_INSECURE_WALLET_TYPE'),
-          arialabel: 'Insecure wallet type'
-        });
+        // icons.push({
+        //   icon: 'exclamation-triangle',
+        //   tooltip: translateRaw('TOOLTIP_INSECURE_WALLET_TYPE'),
+        //   arialabel: 'Insecure wallet type'
+        // });
       }
     }
     if (helpLink) {
@@ -82,7 +82,7 @@ export class WalletButton extends React.PureComponent<Props> {
       <div
         className={classnames({
           WalletButton: true,
-          'WalletButton--small': !isSecure,
+          // 'WalletButton--small': !isSecure,
           'is-disabled': isDisabled
         })}
         onClick={this.handleClick}
