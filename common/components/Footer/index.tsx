@@ -73,7 +73,7 @@ export default class Footer extends React.PureComponent<Props, State> {
                 src={logo}
                 height="55px"
                 width="auto"
-                alt="MyCrypto logo"
+                alt="ogo"
               />
             </NewTabLink>
 

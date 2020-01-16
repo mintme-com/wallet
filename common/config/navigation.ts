@@ -18,7 +18,8 @@ export const navigationLinks: NavigationLink[] = [
   },
   {
     name: 'NAV_SWAP',
-    to: '/swap'
+    to: '/swap',
+    disabled: true
   },
   {
     name: 'NAV_CONTRACTS',
@@ -43,7 +44,7 @@ export const navigationLinks: NavigationLink[] = [
   {
     name: 'NAV_SUPPORT_US',
     to: '/support-us',
-    disabled: !process.env.BUILD_ELECTRON
+    disabled: true
   },
   {
     name: 'NAV_HELP',

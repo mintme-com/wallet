@@ -61,68 +61,68 @@ interface WalletSuggestion {
 
 const WalletSuggestions: React.SFC<WalletSuggestionsProps> = ({ showGenerate }) => {
   const suggestions: WalletSuggestion[] = [
-    {
-      name: translate('X_HARDWARE_WALLET'),
-      type: 'hardware',
-      icon: HardwareWalletIcon,
-      bullets: [
-        translate('WALLET_SUGGESTION_HARDWARE_1'),
-        translate('WALLET_SUGGESTION_HARDWARE_2'),
-        translate('WALLET_SUGGESTION_HARDWARE_3'),
-        translate('WALLET_SUGGESTION_HARDWARE_4')
-      ],
-      links: [
-        {
-          text: translate('LEDGER_REFERRAL_1'),
-          href: ledgerReferralURL
-        },
-        {
-          text: translate('TREZOR_REFERAL'),
-          href: trezorReferralURL
-        }
-      ]
-    },
-    {
-      name: translate('X_METAMASK'),
-      type: 'metamask',
-      icon: MetamaskIcon,
-      bullets: [
-        translate('WALLET_SUGGESTION_METAMASK_1'),
-        translate('WALLET_SUGGESTION_METAMASK_2'),
-        translate('WALLET_SUGGESTION_METAMASK_3'),
-        translate('WALLET_SUGGESTION_METAMASK_4'),
-        translate('WALLET_SUGGESTION_METAMASK_5')
-      ],
-      links: [
-        {
-          text: translate('ACTION_13', {
-            $thing: translateRaw('X_METAMASK')
-          }),
-          href: 'https://metamask.io/'
-        }
-      ]
-    },
-    {
-      name: translate('X_PARITYSIGNER'),
-      type: 'parity',
-      icon: ParitySignerIcon,
-      bullets: [
-        translate('WALLET_SUGGESTION_PARITYSIGNER_1'),
-        translate('WALLET_SUGGESTION_PARITYSIGNER_2'),
-        translate('WALLET_SUGGESTION_PARITYSIGNER_3'),
-        translate('WALLET_SUGGESTION_PARITYSIGNER_4')
-      ],
-      links: [
-        {
-          text: translate('DOWNLOAD_PHONE_APP', { $os: 'iOS' }),
-          href: 'https://itunes.apple.com/us/app/parity-signer/id1218174838'
-        },
-        {
-          text: translate('DOWNLOAD_PHONE_APP', { $os: 'Android' }),
-          href: 'https://play.google.com/store/apps/details?id=com.nativesigner'
-        }
-      ]
-    }
+    // {
+    //   name: translate('X_HARDWARE_WALLET'),
+    //   type: 'hardware',
+    //   icon: HardwareWalletIcon,
+    //   bullets: [
+    //     translate('WALLET_SUGGESTION_HARDWARE_1'),
+    //     translate('WALLET_SUGGESTION_HARDWARE_2'),
+    //     translate('WALLET_SUGGESTION_HARDWARE_3'),
+    //     translate('WALLET_SUGGESTION_HARDWARE_4')
+    //   ],
+    //   links: [
+    //     {
+    //       text: translate('LEDGER_REFERRAL_1'),
+    //       href: ledgerReferralURL
+    //     },
+    //     {
+    //       text: translate('TREZOR_REFERAL'),
+    //       href: trezorReferralURL
+    //     }
+    //   ]
+    // },
+    // {
+    //   name: translate('X_METAMASK'),
+    //   type: 'metamask',
+    //   icon: MetamaskIcon,
+    //   bullets: [
+    //     translate('WALLET_SUGGESTION_METAMASK_1'),
+    //     translate('WALLET_SUGGESTION_METAMASK_2'),
+    //     translate('WALLET_SUGGESTION_METAMASK_3'),
+    //     translate('WALLET_SUGGESTION_METAMASK_4'),
+    //     translate('WALLET_SUGGESTION_METAMASK_5')
+    //   ],
+    //   links: [
+    //     {
+    //       text: translate('ACTION_13', {
+    //         $thing: translateRaw('X_METAMASK')
+    //       }),
+    //       href: 'https://metamask.io/'
+    //     }
+    //   ]
+    // },
+    // {
+    //   name: translate('X_PARITYSIGNER'),
+    //   type: 'parity',
+    //   icon: ParitySignerIcon,
+    //   bullets: [
+    //     translate('WALLET_SUGGESTION_PARITYSIGNER_1'),
+    //     translate('WALLET_SUGGESTION_PARITYSIGNER_2'),
+    //     translate('WALLET_SUGGESTION_PARITYSIGNER_3'),
+    //     translate('WALLET_SUGGESTION_PARITYSIGNER_4')
+    //   ],
+    //   links: [
+    //     {
+    //       text: translate('DOWNLOAD_PHONE_APP', { $os: 'iOS' }),
+    //       href: 'https://itunes.apple.com/us/app/parity-signer/id1218174838'
+    //     },
+    //     {
+    //       text: translate('DOWNLOAD_PHONE_APP', { $os: 'Android' }),
+    //       href: 'https://play.google.com/store/apps/details?id=com.nativesigner'
+    //     }
+    //   ]
+    // }
   ];
 
   if (process.env.BUILD_DOWNLOADABLE) {
