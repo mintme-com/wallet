@@ -43,6 +43,7 @@
 
     @media (min-width: 500px) {
       @include baby-blue;
+      background: linear-gradient(#184b80, #193a5d);
 
       flex: 2;
       display: flex;

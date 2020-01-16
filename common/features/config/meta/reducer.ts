@@ -6,7 +6,7 @@ const META_INITIAL_STATE: types.ConfigMetaState = {
   offline: false,
   autoGasLimit: true,
   latestBlock: '???',
-  theme: Theme.LIGHT
+  theme: Theme.DARK
 };
 
 function changeLanguage(

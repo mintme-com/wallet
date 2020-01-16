@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AppState } from 'features/reducers';
 import { onboardingSelectors } from 'features/onboarding';
 import { Modal } from 'components/v2';
-import logo from 'assets/images/logo-mycrypto-white.svg';
+import logo from 'assets/images/mintmecom-coin-logo.svg';
 import chest from 'assets/images/icn-chest.svg';
 import bankVsMyCrypto from 'assets/images/icn-bank-vs-mycrypto.svg';
 import vault from 'assets/images/icn-vault.svg';

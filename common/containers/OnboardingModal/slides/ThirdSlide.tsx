@@ -24,7 +24,6 @@ export default function ThirdSlide() {
               <ul>
                 <li>{translate('ONBOARDING_TEXT_20')}</li>
                 <li>{translate('ONBOARDING_TEXT_21')}</li>
-                <li>{translate('ONBOARDING_TEXT_22')}</li>
               </ul>
             </li>
             <li>
