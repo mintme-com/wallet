@@ -1,6 +1,7 @@
 import { TAB } from 'components/Header/components/constants';
 
 type StaticNetworkIds =
+  | 'WEB'
   | 'ETH'
   | 'Ropsten'
   | 'Kovan'
@@ -37,7 +38,6 @@ type StaticNetworkIds =
   | 'THUNDERCORE'
   | 'TOMO'
   | 'UBQ'
-  | 'WEB'
   | 'AUX'
   | 'ASK';
 

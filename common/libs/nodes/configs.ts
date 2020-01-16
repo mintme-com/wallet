@@ -6,6 +6,21 @@ export const makeNodeName = (network: string, name: string) => {
 };
 
 export const NODE_CONFIGS: { [key in StaticNetworkIds]: RawNodeConfig[] } = {
+  WEB: [
+    {
+      name: makeNodeName('WEB', 'node1.webchain.network'),
+      type: 'rpc',
+      service: 'node1.webchain.network',
+      url: 'https://node1.webchain.network'
+    },
+    {
+      name: makeNodeName('WEB', 'node2.webchain.network'),
+      type: 'rpc',
+      service: 'node2.webchain.network',
+      url: 'https://node2.webchain.network'
+    }
+  ],
+
   ETH: [
     {
       name: makeNodeName('ETH', 'mycrypto'),
@@ -377,21 +392,6 @@ export const NODE_CONFIGS: { [key in StaticNetworkIds]: RawNodeConfig[] } = {
       type: 'rpc',
       service: 'ubiqscan.io',
       url: 'https://rpc1.ubiqscan.io'
-    }
-  ],
-
-  WEB: [
-    {
-      name: makeNodeName('WEB', 'node1.webchain.network'),
-      type: 'rpc',
-      service: 'node1.webchain.network',
-      url: 'https://node1.webchain.network'
-    },
-    {
-      name: makeNodeName('WEB', 'node2.webchain.network'),
-      type: 'rpc',
-      service: 'node2.webchain.network',
-      url: 'https://node2.webchain.network'
     }
   ],
 

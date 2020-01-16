@@ -216,7 +216,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run tscheck && npm test"
+      "pre-commit": ""
     }
   }
 }
