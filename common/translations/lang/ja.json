@@ -518,7 +518,7 @@
     "BROADCAST_TX_DESCRIPTION": "署名したトランザクションを上書きして、『トランザクションの送出』をクリック",
     "RECENT_TX_NETWORK_EXPLORER": "$network_name ネットワークのエクスプローラー",
     "RECENT_TX_HELP": " $network のネットネットワークにあり、のみが表示されます。もし見つからなければ$explorerに全て表示されす。",
-    "NO_RECENT_TX_FOUND": "直近のMyCryptのトランザクションがありません。$explorerで調べてください。",
+    "NO_RECENT_TX_FOUND": "直近のMintMeのトランザクションがありません。$explorerで調べてください。",
     "BACK_TO_RECENT_TXS": "直近のトランザクションに戻る",
     "WALLET_INFO_UTILITIES": "ユーティリティ",
     "SIGN_MSG_SUCCESS": " $addressに対してメッセージで署名を完了しました",

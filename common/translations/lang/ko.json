@@ -589,7 +589,7 @@
     "BROADCAST_TX_DESCRIPTION": "서명된 트랜잭션을 붙여넣기 하신 후에 '트랜잭션 보내기'를 클릭해주세요",
     "RECENT_TX_NETWORK_EXPLORER": "$network_name 네트워크를 위한 익스플로러",
     "RECENT_TX_HELP": "이 주소에서 MyCrypto를 통해 $network 네트워크로 전송된 최근 트랜잭션만 이곳에 나타납니다. 트랜잭션을 볼 수 없다면 $explorer에서 모든 트랜잭션을 볼 수 있습니다.",
-    "NO_RECENT_TX_FOUND": "MyCrypto에서 전송된 최근 트랜잭션이 없습니다. $explorer를 통해서 확인하세요.",
+    "NO_RECENT_TX_FOUND": "MintMe에서 전송된 최근 트랜잭션이 없습니다. $explorer를 통해서 확인하세요.",
     "BACK_TO_RECENT_TXS": "최근 트랜잭션으로 돌아가기",
     "WALLET_INFO_UTILITIES": "유틸리티",
     "SIGN_MSG_SUCCESS": "$address 주소로 성공적으로 메시지 서명이 되었습니다.",

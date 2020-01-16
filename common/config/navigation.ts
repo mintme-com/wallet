@@ -27,11 +27,13 @@ export const navigationLinks: NavigationLink[] = [
   },
   {
     name: 'NAV_ENS',
-    to: '/ens'
+    to: '/ens',
+    disabled: true
   },
   {
     name: 'NAV_SIGN',
-    to: '/sign-and-verify-message'
+    to: '/sign-and-verify-message',
+    disabled: true
   },
   {
     name: 'NAV_TXSTATUS',
@@ -39,7 +41,8 @@ export const navigationLinks: NavigationLink[] = [
   },
   {
     name: 'NAV_BROADCAST',
-    to: '/pushTx'
+    to: '/pushTx',
+    disabled: true
   },
   {
     name: 'NAV_SUPPORT_US',

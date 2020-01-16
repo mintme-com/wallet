@@ -586,7 +586,7 @@
     "BROADCAST_TX_DESCRIPTION": "Collez une transaction signée et cliquez sur 'Envoyer la transaction'",
     "RECENT_TX_NETWORK_EXPLORER": "un explorateur pour le réseau $network_name",
     "RECENT_TX_HELP": "Seules les transactions récentes envoyées depuis cette adresse via MyCrypto sur le réseau $network sont répertoriées ici. Si vous ne voyez pas votre transaction, vous pouvez toutes les retrouver sur $explorer.",
-    "NO_RECENT_TX_FOUND": "Aucune transaction MyCrypto récente trouvée, essayez de vérifier sur $explorer.",
+    "NO_RECENT_TX_FOUND": "Aucune transaction MintMe récente trouvée, essayez de vérifier sur $explorer.",
     "BACK_TO_RECENT_TXS": "Retour aux transactions récentes",
     "WALLET_INFO_UTILITIES": "Outils",
     "SIGN_MSG_SUCCESS": "Message signé avec succès avec l'adresse $address",

@@ -866,8 +866,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
     isCustom: false,
     color: '#0092ee',
     blockExplorer: makeExplorer({
-      name: 'Webchain Explorer',
-      origin: 'https://explorer.webchain.network'
+      name: 'MintMe Explorer',
+      origin: 'https://mintme.com/explorer'
     }),
     tokens: [],
     contracts: [],
