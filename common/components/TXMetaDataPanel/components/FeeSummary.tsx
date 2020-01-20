@@ -12,7 +12,6 @@ import { transactionFieldsSelectors } from 'features/transaction';
 import { scheduleSelectors } from 'features/schedule';
 import { UnitDisplay, Spinner } from 'components/ui';
 import './FeeSummary.scss';
-import { getOldNetworkUnit } from "../../../utils/helpers";
 
 export interface RenderData {
   gasPriceWei: string;
