@@ -93,7 +93,9 @@ class EquivalentValues extends React.Component<Props, State> {
     const { balance, tokenBalances, isOffline, network } = this.props;
     if (
       nextProps.balance !== balance ||
-      nextProps.tokenBalances !== tokenBalances ||
+      (nextProps.tokenBalances !== tokenBalances &&
+       (Object.entries(tokenBalances).length === 0 && tokenBalances.constructor === Object &&
+           Object.entries(nextProps.tokenBalances).length === 0 && nextProps.tokenBalances.constructor === Object)) ||
       nextProps.isOffline !== isOffline ||
       nextProps.network.unit !== network.unit
     ) {
