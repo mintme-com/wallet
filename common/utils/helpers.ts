@@ -110,10 +110,19 @@ export function makeExplorer(expConfig: ExplorerConfig): BlockExplorerConfig {
   };
 }
 
-export function getOldNetworkUnit(symbol: string): string {
-  if ('MINTME' === symbol) {
+// Rebranding functions
+export function getOldNetworkUnit(newSymbol: string): string {
+  if ('MINTME' === newSymbol) {
     return 'WEB';
   }
 
-  return symbol;
+  return newSymbol;
+}
+
+export function getNewNetworkUnit(oldSymbol: string): string {
+  if ('WEB' === oldSymbol) {
+    return 'MINTME';
+  }
+
+  return oldSymbol;
 }

@@ -1,5 +1,5 @@
 import { handleJSONResponse } from 'api/utils';
-import {getOldNetworkUnit} from "../utils/helpers";
+import { getOldNetworkUnit, getNewNetworkUnit } from "../utils/helpers";
 
 interface IRateSymbols {
   symbols: {
@@ -103,7 +103,7 @@ export const fetchRates = (symbols: string[] = []): Promise<CCResponse> =>
       return symbols.reduce(
         (eqRates, sym) => {
           if (rates[sym]) {
-            eqRates[sym] = rateSymbols.symbols.all.reduce(
+            eqRates[getNewNetworkUnit(sym)] = rateSymbols.symbols.all.reduce(
               (symRates, rateSym) => {
                 symRates[rateSym] = (1 / rates[sym]) * rates[rateSym];
                 return symRates;

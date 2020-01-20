@@ -80,7 +80,7 @@ class FeeSummary extends React.Component<Props> {
 
     const usdBig = network.isTestnet
       ? new BN(0)
-      : feeBig && rates[getOldNetworkUnit(network.unit)] && feeBig.muln(rates[getOldNetworkUnit(network.unit)].USD);
+      : feeBig && rates[network.unit] && feeBig.muln(rates[network.unit].USD);
     const usd =
       isOffline || network.hideEquivalentValues ? null : (
         <UnitDisplay

@@ -14,7 +14,7 @@ import configuredStore from 'features/store';
 render(<Root store={configuredStore} />, document.getElementById('app'));
 
 if (process.env.NODE_ENV === 'production') {
-  consoleAdvertisement();
+  // consoleAdvertisement();
 }
 
 const noOp = (event: DragEvent) => {
