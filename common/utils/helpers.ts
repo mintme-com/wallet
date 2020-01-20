@@ -109,3 +109,11 @@ export function makeExplorer(expConfig: ExplorerConfig): BlockExplorerConfig {
     blockUrl: blockNum => `${config.origin}/${config.blockPath}/${blockNum}`
   };
 }
+
+export function getOldNetworkUnit(symbol: string): string {
+  if ('MINTME' === symbol) {
+    return 'WEB';
+  }
+
+  return symbol;
+}

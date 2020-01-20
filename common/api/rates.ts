@@ -1,4 +1,5 @@
 import { handleJSONResponse } from 'api/utils';
+import {getOldNetworkUnit} from "../utils/helpers";
 
 interface IRateSymbols {
   symbols: {
@@ -57,6 +58,9 @@ const ERROR_MESSAGE = 'Could not fetch rate data.';
 const CCApi = 'https://proxy.mycryptoapi.com/cc';
 
 const CCRates = (symbols: string[]) => {
+  symbols.forEach((symbol: string, key: number) => {
+    symbols[key] = getOldNetworkUnit(symbol);
+  });
   const tsyms = rateSymbols.symbols.all.concat(symbols as any).join(',');
   return `${CCApi}?fsym=ETH&tsyms=${tsyms}`;
 };

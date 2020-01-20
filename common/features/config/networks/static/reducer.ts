@@ -860,8 +860,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
   },
   WEB: {
     id: 'WEB',
-    name: 'Webchain',
-    unit: 'WEB',
+    name: 'MintMe',
+    unit: 'MINTME',
     chainId: 24484,
     isCustom: false,
     color: '#0092ee',

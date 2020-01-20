@@ -12,6 +12,7 @@ import { transactionFieldsSelectors } from 'features/transaction';
 import { scheduleSelectors } from 'features/schedule';
 import { UnitDisplay, Spinner } from 'components/ui';
 import './FeeSummary.scss';
+import { getOldNetworkUnit } from "../../../utils/helpers";
 
 export interface RenderData {
   gasPriceWei: string;
@@ -79,7 +80,7 @@ class FeeSummary extends React.Component<Props> {
 
     const usdBig = network.isTestnet
       ? new BN(0)
-      : feeBig && rates[network.unit] && feeBig.muln(rates[network.unit].USD);
+      : feeBig && rates[getOldNetworkUnit(network.unit)] && feeBig.muln(rates[getOldNetworkUnit(network.unit)].USD);
     const usd =
       isOffline || network.hideEquivalentValues ? null : (
         <UnitDisplay
