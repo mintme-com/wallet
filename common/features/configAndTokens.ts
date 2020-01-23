@@ -55,6 +55,9 @@ export function rehydrateConfigAndCustomTokenState() {
       nextConfigState.networks
     );
     nextConfigState.meta = { ...nextConfigState.meta, ...savedConfigState.meta };
+  } else {
+    // Force switching network to MINTME (Webchain) during first init
+    shepherd.switchNetworks(configInitialState.networks.staticNetworks.WEB.id);
   }
 
   const {
