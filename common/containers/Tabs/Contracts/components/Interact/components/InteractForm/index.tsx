@@ -123,7 +123,7 @@ class InteractForm extends Component<Props, State> {
                 <label className="input-group">
                   <div className="input-group-header">{translate('CONTRACT_TITLE')}</div>
                   <Input
-                    placeholder={`ensdomain.eth or ${donationAddressMap.ETH}`}
+                    placeholder={`${donationAddressMap.WEB}`}
                     name="contract_address"
                     autoComplete="off"
                     value={currentTo.raw}

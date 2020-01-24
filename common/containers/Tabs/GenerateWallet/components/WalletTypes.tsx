@@ -22,9 +22,11 @@ export default class WalletTypes extends React.Component<{}, State> {
 
   public render() {
     const { isShowingGenerate } = this.state;
+    // Mintme-integration var, skip showing all wallets type
+    const skipChooseWalletsType = true;
     return (
       <Template hideBack={!isShowingGenerate} onBack={this.handleBack}>
-        {isShowingGenerate ? (
+        {skipChooseWalletsType ? (
           <GenerateOptions />
         ) : (
           <WalletSuggestions showGenerate={this.showGenerate} />

@@ -35,7 +35,7 @@ const AddressField: React.SFC<Props> = ({
   showLabelMatch,
   toChecksumAddress,
   showIdenticon,
-  placeholder = `donate.mycryptoid.eth or ${donationAddressMap.ETH}`,
+  placeholder = `${donationAddressMap.WEB}`,
   showInputLabel = true,
   onChangeOverride,
   value,

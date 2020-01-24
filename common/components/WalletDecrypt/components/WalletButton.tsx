@@ -69,14 +69,14 @@ export class WalletButton extends React.PureComponent<Props> {
         // });
       }
     }
-    if (helpLink) {
-      icons.push({
-        icon: 'question-circle',
-        tooltip: translateRaw('TOOLTIP_MORE_INFO'),
-        href: helpLink,
-        arialabel: 'More info'
-      });
-    }
+    // if (helpLink) {
+    //   icons.push({
+    //     icon: 'question-circle',
+    //     tooltip: translateRaw('TOOLTIP_MORE_INFO'),
+    //     href: helpLink,
+    //     arialabel: 'More info'
+    //   });
+    // }
 
     return (
       <div

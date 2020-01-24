@@ -211,7 +211,7 @@ export function* handleSendEverything(): SagaIterator {
     yield put(
       notificationsActions.showNotification(
         'warning',
-        `The cost of gas is higher than your balance. Total cost: ${totalCost} >  Your Ether balance: ${etherBalance}`
+        `The cost of gas is higher than your balance. Total cost: ${totalCost} >  Your MINTME balance: ${etherBalance}`
       )
     );
     yield put(actions.sendEverythingFailed());

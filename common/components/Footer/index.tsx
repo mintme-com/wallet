@@ -117,16 +117,9 @@ export default class Footer extends React.PureComponent<Props, State> {
 
             <div className="Footer-support-donate">
               <div className="Footer-support-donate-currency">
-                {translateRaw('DONATE_CURRENCY', { $currency: 'ETH' })}
+                {translateRaw('DONATE_CURRENCY', { $currency: 'WEB' })}
               </div>
-              <div className="Footer-support-donate-address">{donationAddressMap.ETH}</div>
-            </div>
-
-            <div className="Footer-support-donate">
-              <div className="Footer-support-donate-currency">
-                {translateRaw('DONATE_CURRENCY', { $currency: 'BTC' })}
-              </div>
-              <div className="Footer-support-donate-address">{donationAddressMap.BTC}</div>
+              <div className="Footer-support-donate-address">{donationAddressMap.WEB}</div>
             </div>
 
             <div className="Footer-support-friends">

@@ -124,7 +124,7 @@ class RootClass extends Component<Props, State> {
         <Provider store={store}>
           <Router>
             <PageVisitsAnalytics>
-              {onboardingActive && <OnboardingModal />}
+              {/*{onboardingActive && <OnboardingModal />}*/}
               {routes}
               <LegacyRoutes />
               <LogOutPrompt />

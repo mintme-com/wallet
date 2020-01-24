@@ -14,7 +14,7 @@ export const DataField: React.SFC<{}> = () => (
           <Input
             isValid={validData}
             type="text"
-            placeholder={donationAddressMap.ETH}
+            placeholder={donationAddressMap.WEB}
             value={raw}
             readOnly={!!readOnly}
             onChange={onChange}
