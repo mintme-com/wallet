@@ -63,9 +63,9 @@ export class AddCustomTokenForm extends React.PureComponent<Props, State> {
           onChange={this.handleFieldChange('symbol')}
         />
         {!this.props.isOffline && <BalanceField address={address} />}
-        <HelpLink article={HELP_ARTICLE.ADDING_NEW_TOKENS} className="AddCustom-buttons-help">
-          {translate('ADD_CUSTOM_TKN_HELP')}
-        </HelpLink>
+        {/*<HelpLink article={HELP_ARTICLE.ADDING_NEW_TOKENS} className="AddCustom-buttons-help">*/}
+        {/*  {translate('ADD_CUSTOM_TKN_HELP')}*/}
+        {/*</HelpLink>*/}
         <div className="AddCustom-buttons">
           <button
             className="AddCustom-buttons-btn btn btn-sm btn-default"
