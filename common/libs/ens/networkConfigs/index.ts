@@ -39,7 +39,7 @@ export function getValidTLDsForChain(chainId: number): ITLDCollection {
   }
 
   return {
-    eth: true,
+    mintme: true,
     test: true,
     reverse: true
   };
