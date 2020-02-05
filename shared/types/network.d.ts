@@ -39,6 +39,7 @@ type StaticNetworkIds =
   | 'TOMO'
   | 'UBQ'
   | 'AUX'
+  | 'ERE'
   | 'ASK';
 
 export interface BlockExplorerConfig {
