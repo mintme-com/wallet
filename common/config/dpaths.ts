@@ -163,7 +163,7 @@ export const ETI_DEFAULT: DPath = {
   value: "m/44'/464'/0'/0"
 };
 export const WEB_DEFAULT: DPath = {
-  label: 'Default (WEB)',
+  label: 'Default (MINTME)',
   value: "m/44'/227'/0'/0"
 };
 
