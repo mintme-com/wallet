@@ -16,11 +16,12 @@ export default class NewAppReleaseModal extends React.PureComponent<{}, State> {
   };
 
   public async componentDidMount() {
+    // Commented & disabled auto updating #MINTME-INTEGRATION
     try {
-      const newRelease = await getLatestElectronRelease();
-      if (newRelease) {
-        this.setState({ isOpen: true, newRelease });
-      }
+      // const newRelease = await getLatestElectronRelease();
+      // if (newRelease) {
+      //   this.setState({ isOpen: true, newRelease });
+      // }
     } catch (err) {
       console.error('Failed to fetch latest release from GitHub:', err);
     }
