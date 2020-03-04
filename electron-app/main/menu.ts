@@ -44,7 +44,7 @@ const HELP_MENU: MenuItemConstructorOptions = {
     {
       label: 'Help / FAQ',
       click() {
-        shell.openExternal('https://mintme.com/kb');
+        shell.openExternal('https://www.mintme.com/coin/faq');
       }
     },
     {
