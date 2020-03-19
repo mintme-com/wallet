@@ -44,6 +44,15 @@ export default class GenerateMnemonic extends React.Component<{}, State> {
     const [firstHalf, lastHalf] =
       confirmWords.length === 0 ? this.splitWordsIntoHalves(words) : confirmWords;
 
+    // MINTME Integrations. Find Duplicates in array words and if dupl, regenerate Word Array;
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index);
+
+    let found = findDuplicates(words);
+
+    if (found.length > 0) {
+      this.regenerateWordArray()
+    }
+
     const content = isConfirmed ? (
       <FinalSteps walletType={WalletType.Mnemonic} />
     ) : (
@@ -117,7 +126,6 @@ export default class GenerateMnemonic extends React.Component<{}, State> {
 
   private checkCanContinue = () => {
     const { isConfirming, words, confirmValues } = this.state;
-
     if (isConfirming) {
       return words.reduce((prev, word, index) => {
         return word === confirmValues[index] && prev;
