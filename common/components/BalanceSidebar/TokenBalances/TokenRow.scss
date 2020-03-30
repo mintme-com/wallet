@@ -14,8 +14,17 @@
   }
 
   &-symbol {
+    max-width: 250px;
     position: relative;
     font-weight: 300;
+
+    &-div {
+      max-width: 230px;
+    }
+
+    span {
+      word-wrap: break-word;
+    }
 
     &-remove {
       position: absolute;

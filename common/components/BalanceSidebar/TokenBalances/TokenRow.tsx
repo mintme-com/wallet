@@ -61,7 +61,9 @@ export default class TokenRow extends React.PureComponent<Props, State> {
           </td>
         )}
         <td className="TokenRow-symbol">
-          {symbol}
+          <div className="TokenRow-symbol-div">
+            <span>{symbol}</span>
+          </div>
           {!!custom && (
             <img
               src={removeIcon}
