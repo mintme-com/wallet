@@ -114,7 +114,7 @@ class WalletInfo extends React.PureComponent<Props, State> {
                   </button>
 
                   <button className="btn btn-info btn-block" onClick={this.openKeystoreModal}>
-                    {translate('GENERATE_KEYSTORE_TITLE')}
+                    <span>{translate('GENERATE_KEYSTORE_TITLE')}</span>
                   </button>
                 </div>
               </div>

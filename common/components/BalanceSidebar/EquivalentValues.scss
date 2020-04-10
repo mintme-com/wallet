@@ -2,6 +2,11 @@
 @import 'common/sass/mixins';
 
 .EquivalentValues {
+  .Select-control {
+    // Mintme integration
+    min-width: 5.9rem;
+  }
+
   &-header {
     display: flex;
     align-items: center;
