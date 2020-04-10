@@ -33,6 +33,8 @@ $speed: 70ms;
   }
 
   &-tooltip {
+    // Mintme integration
+    display: none;
     &-arrow {
       .rc-slider-tooltip-placement-top & {
         border-top-color: color(tooltip-bg);
