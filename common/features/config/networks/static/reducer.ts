@@ -870,8 +870,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'MintMe Explorer',
       origin: 'https://mintme.com/explorer'
     }),
-    tokens: [],
-    contracts: [],
+    tokens: require('config/tokens/web.json'),
+    contracts: require('config/contracts/web.json'),
     dPathFormats: {
       [InsecureWalletName.MNEMONIC_PHRASE]: WEB_DEFAULT
     },
