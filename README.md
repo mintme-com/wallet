@@ -1,14 +1,9 @@
-# MyCrypto Web & Desktop Apps
+# MintMe Wallet Desktop Apps
 
 [![Build Status](https://travis-ci.org/MyCryptoHQ/MyCrypto.svg?branch=develop)](https://travis-ci.org/MyCryptoHQ/MyCrypto)
 [![Coverage Status](https://coveralls.io/repos/github/MyCryptoHQ/MyCrypto/badge.svg?branch=develop)](https://coveralls.io/github/MyCryptoHQ/MyCrypto?branch=develop)
 
-* **Just looking to download?** Grab our [latest release](https://github.com/MyCryptoHQ/MyCrypto/releases).
-* **Looking for the old site?** Check out [https://legacy.mycrypto.com](https://legacy.mycrypto.com) or the source at [MyCryptoHQ/mycrypto.com](https://github.com/MyCryptoHQ/mycrypto.com)
-
-## Verifying our releases
-You can find how to do this on our [support document](https://support.mycrypto.com/staying-safe/verifying-authenticity-of-desktop-app)
-
+* **Just looking to download?** Grab our [latest release](https://https://github.com/webchain-network/new-wallet/releases).
 
 ## Development / Build Requirements
 
@@ -18,7 +13,7 @@ You can find how to do this on our [support document](https://support.mycrypto.c
 
 <sub>\*Higher versions should work fine, but may cause inconsistencies. It's suggested you run 8.16.0 using `nvm`.</sub>
 <br/>
-<sub>**npm is NOT supported for package management. MyCrypto uses yarn.lock to ensure sub-dependency versions are pinned, so yarn is required to install node_modules</sub>
+<sub>**npm is NOT supported for package management. MintMe Wallet uses yarn.lock to ensure sub-dependency versions are pinned, so yarn is required to install node_modules</sub>
 <br/>
 <sub>\***Python 3 is **not** supported, since our dependencies use `node-gyp`.</sub>
 <br/>
@@ -151,18 +146,6 @@ yarn test:int
 - https://basarat.gitbooks.io/typescript/
 - https://blog.mariusschulz.com/series/typescript-evolution
 
-## More information is available on the [Wiki Pages](https://github.com/MyCryptoHQ/MyCrypto/wiki)
-- [Getting your token added to MyCrypto](https://github.com/MyCryptoHQ/MyCrypto/wiki/Contributing-%E2%80%90-Adding-Tokens)
-- [Adding your Network or Node](https://github.com/MyCryptoHQ/MyCrypto/wiki/Contributing-%E2%80%90-Network-or-Node)
-- [Adding your Web3 Wallet & Logo](https://github.com/MyCryptoHQ/MyCrypto/wiki/Contributing-%E2%80%90-Web3-Wallet)
-- [MyCryptoBuilds](https://github.com/MyCryptoHQ/MyCrypto/wiki/MyCryptoBuilds) - access a build by commithash, PR number, or branch name without building it yourself!
-
-## Branching Model
-
-MyCrypto is open-source and encourages pull-requests from third-parties. Our branching model is described below.
-
-To start, fork this repository and have your own remote repository on GitHub.
-
 #### Naming Convention
 
 Your branch name must meet our naming conventions to help with administration and identify what type of branch it is.
@@ -182,8 +165,6 @@ Feature branches are used to implement new enhancements for upcoming releases. A
 
 We begin on the latest `develop` branch and branch off with the naming convention of `feature/foo`.
 
-Please also make yourself familiar with our [Contributor Guidelines](https://github.com/MyCryptoHQ/MyCrypto/wiki/Contributor-Guidelines).
-
 ```sh
 $ git checkout -b feature/foo develop
 ```
@@ -195,5 +176,3 @@ You should use `feature/foo` to implement and commit all changed required for yo
 * Add neccessary unit tests for your features code.
 
 When your feature is complete, push it to your remote repo and prepare it for a pull request.
-
-When you are creating a pull request, make sure the base is `MyCryptoHQ/mycrypto/develop` and compare to `feature/foo`.
