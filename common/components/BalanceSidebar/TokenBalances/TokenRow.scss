@@ -14,12 +14,19 @@
   }
 
   &-symbol {
+    @media (min-width: 900px) and (max-width: 1215px){
+      max-width: 175px ;
+      &-div {
+        max-width: 85% !important;
+      }
+    }
+
     max-width: 250px;
     position: relative;
     font-weight: 300;
 
     &-div {
-      max-width: 230px;
+      max-width: 89%;
     }
 
     span {
