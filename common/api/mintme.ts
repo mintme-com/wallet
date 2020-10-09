@@ -1,4 +1,4 @@
-import {mintmeApiV2URL} from 'config';
+import {bityConfig, mintmeApiV2URL} from 'config';
 import {checkHttpStatus, parseJSON} from "./utils";
 
 export function getDeployedTokens() {
