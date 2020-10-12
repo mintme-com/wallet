@@ -53,8 +53,10 @@ export const gasPriceDefaults: GasPriceSetting = {
 
 export const MINIMUM_PASSWORD_LENGTH = 12;
 
+// MINTME
 export const knowledgeBaseURL = 'https://www.mintme.com/coin/faq';
-export const mintmeApiV2URL = 'https://localhost/dev/api/v2/';
+export const mintmeApiV2URL = 'http://localhost/dev/api/v2';
+
 export const ledgerReferralURL = 'https://www.ledgerwallet.com/r/1985?path=/products/';
 export const trezorReferralURL = 'https://shop.trezor.io/?offer_id=10&aff_id=1735';
 // TODO - Update url
