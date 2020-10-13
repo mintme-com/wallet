@@ -36,6 +36,10 @@ import {
 import * as types from './types';
 import * as actions from './actions';
 import * as selectors from './selectors';
+import getDeployedTokens from 'api/mintme';
+import {shepherdProvider} from "../../libs/nodes";
+import ERC20 from "../../libs/erc20";
+import {Result} from "mycrypto-nano-result";
 
 export function* getTokenBalancesSaga(wallet: IWallet, tokens: Token[]) {
   const node: INode = yield select(configNodesSelectors.getNodeLib);
@@ -167,6 +171,18 @@ export function* handleScanWalletAction(action: types.ScanWalletForTokensAction)
 }
 
 export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
+  getDeployedTokens().then((result) => {
+    console.log(result);
+  })
+
+  shepherdProvider
+    .sendCallRequest({ data: ERC20.balanceOf.encodeInput({ _owner: '0x19C85018105036B62805E9d18a7665B05BFB123d' }), to: '0x69a3eDdB6bE2d56E668E7DfF68DB1303e675A0F0' })
+    .then(ERC20.balanceOf.decodeOutput)
+    .then(({ balance }) => {
+      const result = Result.from({ res: balance });
+      return ( { balance: result });
+    })
+
   try {
     const isOffline = yield select(configMetaSelectors.getOffline);
     if (isOffline) {
