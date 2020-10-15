@@ -1,38 +1,29 @@
-import { SagaIterator, delay, Task } from 'redux-saga';
-import { apply, call, fork, put, select, takeEvery, take, cancel } from 'redux-saga/effects';
+import {delay, SagaIterator, Task} from 'redux-saga';
+import {apply, call, cancel, fork, put, select, take, takeEvery} from 'redux-saga/effects';
 
 import configTokens from 'config/tokens';
-import { translateRaw } from 'translations';
-import { INode } from 'libs/nodes/INode';
-import { Wei } from 'libs/units';
-import { Token } from 'types/network';
+import {translateRaw} from 'translations';
+import {INode} from 'libs/nodes/INode';
+import {Wei} from 'libs/units';
+import {Token} from 'types/network';
 import {
-  IWallet,
-  MnemonicWallet,
-  getPrivKeyWallet,
-  getKeystoreWallet,
   determineKeystoreType,
-  KeystoreTypes,
+  getKeystoreWallet,
+  getPrivKeyWallet,
   getUtcWallet,
+  IWallet,
+  KeystoreTypes,
+  MnemonicWallet,
   signWrapper,
   WalletConfig
 } from 'libs/wallet';
-import { loadWalletConfig, saveWalletConfig } from 'utils/localStorage';
-import { getAddressesAndSymbols } from 'utils/tokens';
-import { AppState } from 'features/reducers';
+import {loadWalletConfig, saveWalletConfig} from 'utils/localStorage';
+import {getAddressesAndSymbols} from 'utils/tokens';
+import {AppState} from 'features/reducers';
 import * as derivedSelectors from 'features/selectors';
-import {
-  configMetaTypes,
-  configMetaSelectors,
-  configNodesSelectors,
-  configSelectors
-} from 'features/config';
-import { notificationsActions } from 'features/notifications';
-import {
-  customTokensTypes,
-  customTokensActions,
-  customTokensSelectors
-} from 'features/customTokens';
+import {configMetaSelectors, configMetaTypes, configNodesSelectors, configSelectors} from 'features/config';
+import {notificationsActions} from 'features/notifications';
+import {customTokensActions, customTokensSelectors, customTokensTypes} from 'features/customTokens';
 import * as types from './types';
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -40,6 +31,7 @@ import getDeployedTokens from 'api/mintme';
 import {shepherdProvider} from "../../libs/nodes";
 import ERC20 from "../../libs/erc20";
 import {Result} from "mycrypto-nano-result";
+import {AddCustomTokenAction, CustomTokensActions} from "../customTokens/types";
 
 export function* getTokenBalancesSaga(wallet: IWallet, tokens: Token[]) {
   const node: INode = yield select(configNodesSelectors.getNodeLib);
@@ -175,17 +167,37 @@ export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
   let deployedTokens: object = yield call(getDeployedTokens);
 
   for (const key in deployedTokens) {
-    shepherdProvider
-      .sendCallRequest({
-        data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
-        to: deployedTokens[key].token_address
-      })
-      .then(ERC20.balanceOf.decodeOutput)
-      .then(({balance}) => {
-        let result = Result.from({res: balance});
-        deployedTokensBalance.push({name: deployedTokens[key].name, address: deployedTokens[key].token_address, balance: result});
-      })
+    let data: object = {
+      data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
+      to: deployedTokens[key].token_address
+    };
+    let request = yield call(shepherdProvider.sendCallRequest, data);
+
+    let encodedBalance = yield call(ERC20.balanceOf.decodeOutput, request);
+    console.log('decodedInput', ERC20.balanceOf.decodeOutput(request));
+    deployedTokensBalance.push({
+      name: deployedTokens[key].name,
+      address: deployedTokens[key].token_address,
+      balance: ERC20.balanceOf.decodeOutput(request)
+    });
   }
+
+  let i: number = 0;
+  do {
+    if (parseInt(deployedTokensBalance[i].balance.balance) > 0) {
+      const action: AddCustomTokenAction = {
+        type: CustomTokensActions.ADD,
+        payload: {
+          address: deployedTokensBalance[i].address,
+          decimal: 12,
+          symbol: deployedTokensBalance[i].name,
+        },
+      }
+      console.log('executed', action);
+      yield call(handleCustomTokenAdd, action);
+    }
+    i++;
+  } while (deployedTokensBalance.hasOwnProperty(i));
 
   try {
     const isOffline = yield select(configMetaSelectors.getOffline);
