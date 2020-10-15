@@ -171,17 +171,21 @@ export function* handleScanWalletAction(action: types.ScanWalletForTokensAction)
 }
 
 export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
-  getDeployedTokens().then((result) => {
-    console.log(result);
-  })
+  let deployedTokensBalance = [];
+  let deployedTokens: object = yield call(getDeployedTokens);
 
-  shepherdProvider
-    .sendCallRequest({ data: ERC20.balanceOf.encodeInput({ _owner: '0x19C85018105036B62805E9d18a7665B05BFB123d' }), to: '0x69a3eDdB6bE2d56E668E7DfF68DB1303e675A0F0' })
-    .then(ERC20.balanceOf.decodeOutput)
-    .then(({ balance }) => {
-      const result = Result.from({ res: balance });
-      return ( { balance: result });
-    })
+  for (const key in deployedTokens) {
+    shepherdProvider
+      .sendCallRequest({
+        data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
+        to: deployedTokens[key].token_address
+      })
+      .then(ERC20.balanceOf.decodeOutput)
+      .then(({balance}) => {
+        let result = Result.from({res: balance});
+        deployedTokensBalance.push({name: deployedTokens[key].name, address: deployedTokens[key].token_address, balance: result});
+      })
+  }
 
   try {
     const isOffline = yield select(configMetaSelectors.getOffline);
