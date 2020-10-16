@@ -3,7 +3,6 @@ import { app, ipcMain, BrowserWindow } from 'electron';
 import { registerServer } from 'shared/enclave/server';
 import getWindow from './window';
 
-app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 // Quit application when all windows are closed
 app.on('window-all-closed', () => {
   // On macOS it is common for applications to stay open
