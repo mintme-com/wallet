@@ -163,28 +163,35 @@ export function* handleScanWalletAction(action: types.ScanWalletForTokensAction)
 }
 
 export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
-  let deployedTokensBalance = [];
+  let deployedTokensBalance: any = [];
   let deployedTokens: object = yield call(getDeployedTokens);
 
   for (const key in deployedTokens) {
-    let data: object = {
-      data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
-      to: deployedTokens[key].token_address
-    };
-    let request = yield call(shepherdProvider.sendCallRequest, data);
+    if (deployedTokens.hasOwnProperty(key)) {
+      let data: object = {
+        data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
+        to: deployedTokens[key].token_address
+      };
+      let request = yield call(shepherdProvider.sendCallRequest, data);
 
-    let encodedBalance = yield call(ERC20.balanceOf.decodeOutput, request);
-    console.log('decodedInput', ERC20.balanceOf.decodeOutput(request));
-    deployedTokensBalance.push({
-      name: deployedTokens[key].name,
-      address: deployedTokens[key].token_address,
-      balance: ERC20.balanceOf.decodeOutput(request)
-    });
+      deployedTokensBalance.push({
+        name: deployedTokens[key].name,
+        address: deployedTokens[key].token_address,
+        balance: ERC20.balanceOf.decodeOutput(request)
+      });
+    }
   }
+  const customTokens: AppState['customTokens'] = yield select(
+    customTokensSelectors.getCustomTokens
+  );
+
+  const customTokensSymbols = customTokens.map((token: Token) => token.symbol);
 
   let i: number = 0;
   do {
-    if (parseInt(deployedTokensBalance[i].balance.balance) > 0) {
+    if (parseInt(deployedTokensBalance[i].balance.balance) > 0 &&
+      !customTokensSymbols.includes(deployedTokensBalance[i].name)
+    ) {
       const action: AddCustomTokenAction = {
         type: CustomTokensActions.ADD,
         payload: {
@@ -193,7 +200,6 @@ export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
           symbol: deployedTokensBalance[i].name,
         },
       }
-      console.log('executed', action);
       yield call(handleCustomTokenAdd, action);
     }
     i++;
