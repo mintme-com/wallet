@@ -30,7 +30,6 @@ import * as selectors from './selectors';
 import getDeployedTokens from 'api/mintme';
 import {shepherdProvider} from "../../libs/nodes";
 import ERC20 from "../../libs/erc20";
-import {Result} from "mycrypto-nano-result";
 import {AddCustomTokenAction, CustomTokensActions} from "../customTokens/types";
 
 export function* getTokenBalancesSaga(wallet: IWallet, tokens: Token[]) {
@@ -162,48 +161,56 @@ export function* handleScanWalletAction(action: types.ScanWalletForTokensAction)
   yield call(scanWalletForTokensSaga, action.payload);
 }
 
-export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
-  let deployedTokensBalance: any = [];
-  let deployedTokens: object = yield call(getDeployedTokens);
+function *scanForDeployedTokens(wallet: IWallet) {
+  try {
+    let deployedTokensBalance: any = [];
+    let deployedTokens: object = yield call(getDeployedTokens);
 
-  for (const key in deployedTokens) {
-    if (deployedTokens.hasOwnProperty(key)) {
-      let data: object = {
-        data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
-        to: deployedTokens[key].token_address
-      };
-      let request = yield call(shepherdProvider.sendCallRequest, data);
+    for (const key in deployedTokens) {
+      if (deployedTokens.hasOwnProperty(key)) {
+        let data: object = {
+          data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
+          to: deployedTokens[key].token_address
+        };
+        let request = yield call(shepherdProvider.sendCallRequest, data);
 
-      deployedTokensBalance.push({
-        name: deployedTokens[key].name,
-        address: deployedTokens[key].token_address,
-        balance: ERC20.balanceOf.decodeOutput(request)
-      });
-    }
-  }
-  const customTokens: AppState['customTokens'] = yield select(
-    customTokensSelectors.getCustomTokens
-  );
-
-  const customTokensSymbols = customTokens.map((token: Token) => token.symbol);
-
-  let i: number = 0;
-  do {
-    if (parseInt(deployedTokensBalance[i].balance.balance) > 0 &&
-      !customTokensSymbols.includes(deployedTokensBalance[i].name)
-    ) {
-      const action: AddCustomTokenAction = {
-        type: CustomTokensActions.ADD,
-        payload: {
-          address: deployedTokensBalance[i].address,
-          decimal: 12,
-          symbol: deployedTokensBalance[i].name,
-        },
+        deployedTokensBalance.push({
+          name: deployedTokens[key].name,
+          address: deployedTokens[key].token_address,
+          balance: ERC20.balanceOf.decodeOutput(request)
+        });
       }
-      yield call(handleCustomTokenAdd, action);
     }
-    i++;
-  } while (deployedTokensBalance.hasOwnProperty(i));
+    const customTokens: AppState['customTokens'] = yield select(
+      customTokensSelectors.getCustomTokens
+    );
+
+    const customTokensSymbols = customTokens.map((token: Token) => token.symbol);
+
+    let i: number = 0;
+    do {
+      if (parseInt(deployedTokensBalance[i].balance.balance) > 0 &&
+        !customTokensSymbols.includes(deployedTokensBalance[i].name)
+      ) {
+        const action: AddCustomTokenAction = {
+          type: CustomTokensActions.ADD,
+          payload: {
+            address: deployedTokensBalance[i].address,
+            decimal: 12,
+            symbol: deployedTokensBalance[i].name,
+          },
+        };
+        yield call(handleCustomTokenAdd, action);
+      }
+      i++;
+    } while (deployedTokensBalance.hasOwnProperty(i));
+  } catch (error) {
+    //
+  }
+}
+
+export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
+  yield call(scanForDeployedTokens, wallet);
 
   try {
     const isOffline = yield select(configMetaSelectors.getOffline);
@@ -312,6 +319,7 @@ export function* unlockKeystoreSaga(action: types.UnlockKeystoreAction): SagaIte
   // TODO: provide a more descriptive error than the two 'ERROR_6' (invalid pass) messages above
   yield call(stopLoadingSpinner, spinnerTask);
   yield put(actions.setWallet(wallet));
+  yield call(scanForDeployedTokens, wallet);
 }
 
 export function* unlockMnemonicSaga(action: types.UnlockMnemonicAction): SagaIterator {

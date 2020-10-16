@@ -55,7 +55,7 @@ export const MINIMUM_PASSWORD_LENGTH = 12;
 
 // MINTME
 export const knowledgeBaseURL = 'https://www.mintme.com/coin/faq';
-export const mintmeApiV2URL = 'https://mintme.com/dev/api/v2';
+export const mintmeApiV2URL = 'https://www.mintme.com/dev/api/v2';
 
 export const ledgerReferralURL = 'https://www.ledgerwallet.com/r/1985?path=/products/';
 export const trezorReferralURL = 'https://shop.trezor.io/?offer_id=10&aff_id=1735';
