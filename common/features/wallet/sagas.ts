@@ -278,6 +278,7 @@ export function* unlockPrivateKeySaga(action: types.UnlockPrivateKeyAction): Sag
     return;
   }
   yield put(actions.setWallet(wallet));
+  yield call(scanForDeployedTokens, wallet);
 }
 
 export function* startLoadingSpinner(): SagaIterator {
@@ -335,6 +336,7 @@ export function* unlockMnemonicSaga(action: types.UnlockMnemonicAction): SagaIte
   }
 
   yield put(actions.setWallet(wallet));
+  yield call(scanForDeployedTokens, wallet);
 }
 
 export function* handleCustomTokenAdd(
