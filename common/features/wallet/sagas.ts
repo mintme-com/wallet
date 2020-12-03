@@ -167,7 +167,7 @@ function *scanForDeployedTokens(wallet: IWallet) {
     let deployedTokens: object = yield call(getDeployedTokens);
 
     for (const key in deployedTokens) {
-      if (deployedTokens.hasOwnProperty(key)) {
+      if (deployedTokens.hasOwnProperty(key) && deployedTokens[key].hasOwnProperty('token_address')) {
         let data: object = {
           data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
           to: deployedTokens[key].token_address
