@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/MyCryptoHQ/MyCrypto.svg?branch=develop)](https://travis-ci.org/MyCryptoHQ/MyCrypto)
 [![Coverage Status](https://coveralls.io/repos/github/MyCryptoHQ/MyCrypto/badge.svg?branch=develop)](https://coveralls.io/github/MyCryptoHQ/MyCrypto?branch=develop)
 
-* **Just looking to download?** Grab our [latest release](https://https://github.com/webchain-network/new-wallet/releases).
+* **Just looking to download?** Grab our [latest release](https://github.com/webchain-network/new-wallet/releases).
 
 ## Development / Build Requirements
 

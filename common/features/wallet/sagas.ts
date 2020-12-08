@@ -1,41 +1,36 @@
-import { SagaIterator, delay, Task } from 'redux-saga';
-import { apply, call, fork, put, select, takeEvery, take, cancel } from 'redux-saga/effects';
+import {delay, SagaIterator, Task} from 'redux-saga';
+import {apply, call, cancel, fork, put, select, take, takeEvery} from 'redux-saga/effects';
 
 import configTokens from 'config/tokens';
-import { translateRaw } from 'translations';
-import { INode } from 'libs/nodes/INode';
-import { Wei } from 'libs/units';
-import { Token } from 'types/network';
+import {translateRaw} from 'translations';
+import {INode} from 'libs/nodes/INode';
+import {Wei} from 'libs/units';
+import {Token} from 'types/network';
 import {
-  IWallet,
-  MnemonicWallet,
-  getPrivKeyWallet,
-  getKeystoreWallet,
   determineKeystoreType,
-  KeystoreTypes,
+  getKeystoreWallet,
+  getPrivKeyWallet,
   getUtcWallet,
+  IWallet,
+  KeystoreTypes,
+  MnemonicWallet,
   signWrapper,
   WalletConfig
 } from 'libs/wallet';
-import { loadWalletConfig, saveWalletConfig } from 'utils/localStorage';
-import { getAddressesAndSymbols } from 'utils/tokens';
-import { AppState } from 'features/reducers';
+import {loadWalletConfig, saveWalletConfig} from 'utils/localStorage';
+import {getAddressesAndSymbols} from 'utils/tokens';
+import {AppState} from 'features/reducers';
 import * as derivedSelectors from 'features/selectors';
-import {
-  configMetaTypes,
-  configMetaSelectors,
-  configNodesSelectors,
-  configSelectors
-} from 'features/config';
-import { notificationsActions } from 'features/notifications';
-import {
-  customTokensTypes,
-  customTokensActions,
-  customTokensSelectors
-} from 'features/customTokens';
+import {configMetaSelectors, configMetaTypes, configNodesSelectors, configSelectors} from 'features/config';
+import {notificationsActions} from 'features/notifications';
+import {customTokensActions, customTokensSelectors, customTokensTypes} from 'features/customTokens';
 import * as types from './types';
 import * as actions from './actions';
 import * as selectors from './selectors';
+import getDeployedTokens from 'api/mintme';
+import {shepherdProvider} from "../../libs/nodes";
+import ERC20 from "../../libs/erc20";
+import {AddCustomTokenAction, CustomTokensActions} from "../customTokens/types";
 
 export function* getTokenBalancesSaga(wallet: IWallet, tokens: Token[]) {
   const node: INode = yield select(configNodesSelectors.getNodeLib);
@@ -166,7 +161,57 @@ export function* handleScanWalletAction(action: types.ScanWalletForTokensAction)
   yield call(scanWalletForTokensSaga, action.payload);
 }
 
+function *scanForDeployedTokens(wallet: IWallet) {
+  try {
+    let deployedTokensBalance: any = [];
+    let deployedTokens: object = yield call(getDeployedTokens);
+
+    for (const key in deployedTokens) {
+      if (deployedTokens.hasOwnProperty(key) && deployedTokens[key].hasOwnProperty('token_address')) {
+        let data: object = {
+          data: ERC20.balanceOf.encodeInput({_owner: wallet.getAddressString()}),
+          to: deployedTokens[key].token_address
+        };
+        let request = yield call(shepherdProvider.sendCallRequest, data);
+
+        deployedTokensBalance.push({
+          name: deployedTokens[key].name,
+          address: deployedTokens[key].token_address,
+          balance: ERC20.balanceOf.decodeOutput(request)
+        });
+      }
+    }
+    const customTokens: AppState['customTokens'] = yield select(
+      customTokensSelectors.getCustomTokens
+    );
+
+    const customTokensSymbols = customTokens.map((token: Token) => token.symbol);
+
+    let i: number = 0;
+    do {
+      if (parseInt(deployedTokensBalance[i].balance.balance) > 0 &&
+        !customTokensSymbols.includes(deployedTokensBalance[i].name)
+      ) {
+        const action: AddCustomTokenAction = {
+          type: CustomTokensActions.ADD,
+          payload: {
+            address: deployedTokensBalance[i].address,
+            decimal: 12,
+            symbol: deployedTokensBalance[i].name,
+          },
+        };
+        yield call(handleCustomTokenAdd, action);
+      }
+      i++;
+    } while (deployedTokensBalance.hasOwnProperty(i));
+  } catch (error) {
+    //
+  }
+}
+
 export function* scanWalletForTokensSaga(wallet: IWallet): SagaIterator {
+  yield call(scanForDeployedTokens, wallet);
+
   try {
     const isOffline = yield select(configMetaSelectors.getOffline);
     if (isOffline) {
@@ -233,6 +278,7 @@ export function* unlockPrivateKeySaga(action: types.UnlockPrivateKeyAction): Sag
     return;
   }
   yield put(actions.setWallet(wallet));
+  yield call(scanForDeployedTokens, wallet);
 }
 
 export function* startLoadingSpinner(): SagaIterator {
@@ -274,6 +320,7 @@ export function* unlockKeystoreSaga(action: types.UnlockKeystoreAction): SagaIte
   // TODO: provide a more descriptive error than the two 'ERROR_6' (invalid pass) messages above
   yield call(stopLoadingSpinner, spinnerTask);
   yield put(actions.setWallet(wallet));
+  yield call(scanForDeployedTokens, wallet);
 }
 
 export function* unlockMnemonicSaga(action: types.UnlockMnemonicAction): SagaIterator {
@@ -289,6 +336,7 @@ export function* unlockMnemonicSaga(action: types.UnlockMnemonicAction): SagaIte
   }
 
   yield put(actions.setWallet(wallet));
+  yield call(scanForDeployedTokens, wallet);
 }
 
 export function* handleCustomTokenAdd(
