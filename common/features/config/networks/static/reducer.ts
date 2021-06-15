@@ -863,7 +863,7 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
     id: 'WEB',
     name: 'MintMe',
     unit: 'MINTME',
-    chainId: 24484,
+    chainId: 24734,
     isCustom: false,
     color: '#0092ee',
     blockExplorer: makeExplorer({
