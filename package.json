@@ -38,7 +38,7 @@
     "lodash.flatten": "4.4.0",
     "lodash.get": "4.4.2",
     "moment": "2.22.1",
-    "moment-timezone": "0.5.14",
+    "moment-timezone": "0.5.35",
     "mycrypto-eth-exists": "1.0.0",
     "mycrypto-shepherd": "1.4.0",
     "normalizr": "3.2.4",
