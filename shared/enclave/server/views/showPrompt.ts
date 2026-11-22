@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, IpcMessageEvent } from 'electron';
+import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 
 export default function showPrompt(template: string, event: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,13 @@ export default function showPrompt(template: string, event: string): Promise<str
       height: 380,
       frame: false,
       backgroundColor: '#21252B',
-      darkTheme: true
+      darkTheme: true,
+      webPreferences: {
+        // These prompts are local, static data URLs and require only ipcRenderer.
+        nodeIntegration: true,
+        contextIsolation: false,
+        sandbox: false
+      }
     });
 
     window.on('closed', () => {
@@ -24,7 +30,10 @@ export default function showPrompt(template: string, event: string): Promise<str
       reject(new Error('ENCLAVE_TREZOR_CANCELED'));
     });
 
-    ipcMain.once(event, (_: IpcMessageEvent, value: string) => {
+    ipcMain.once(event, (ipcEvent: IpcMainEvent, value: string) => {
+      if (ipcEvent.sender !== window.webContents) {
+        return;
+      }
       try {
         resolve(value);
         hasResolved = true;

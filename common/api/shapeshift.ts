@@ -105,11 +105,7 @@ class ShapeshiftService {
     this.retrieveAccessTokenFromStorage();
 
     if (process.env.BUILD_ELECTRON) {
-      const { ipcRenderer } = (window as any).require('electron');
-
-      ipcRenderer.on('shapeshift-set-token', (_: any, token: string) =>
-        this.saveAccessTokenToStorage(token)
-      );
+      window.electronAPI!.onShapeShiftToken(token => this.saveAccessTokenToStorage(token));
     }
   }
 
@@ -182,9 +178,7 @@ class ShapeshiftService {
     const url = `${SHAPESHIFT_API_URL}?${query}`;
 
     if (process.env.BUILD_ELECTRON) {
-      const { ipcRenderer } = (window as any).require('electron');
-
-      ipcRenderer.send('shapeshift-authorize', url);
+      window.electronAPI!.authorizeShapeShift(url);
     } else {
       window.open(url, '_blank', 'width=800, height=600, menubar=yes');
     }
@@ -203,9 +197,7 @@ class ShapeshiftService {
     this.saveAccessTokenToStorage(token);
 
     if (process.env.BUILD_ELECTRON) {
-      const { ipcRenderer } = (window as any).require('electron');
-
-      ipcRenderer.send('shapeshift-token-retrieved', token);
+      window.electronAPI!.setShapeShiftToken(token);
     }
   };
 

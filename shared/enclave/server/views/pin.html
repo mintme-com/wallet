@@ -50,7 +50,6 @@
 
   <script nonce="$scriptNonce">
     var ipcRenderer = require('electron').ipcRenderer;
-    var remote = require('electron').remote;
     var pin = [];
     var pinButtons = document.querySelectorAll('.pin-button');
     var input = document.querySelector('.pin-input');
@@ -76,7 +75,6 @@
     });
 
     close.addEventListener('click', function () {
-      var window = remote.getCurrentWindow();
       window.close();
     });
   </script>

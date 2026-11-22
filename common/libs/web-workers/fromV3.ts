@@ -1,6 +1,6 @@
 import { IFullWallet, fromPrivateKey } from 'ethereumjs-wallet';
 import { toBuffer } from 'ethereumjs-util';
-import Worker from 'worker-loader!./workers/fromV3.worker.ts';
+import Worker from './workers/fromV3.worker?worker';
 
 export default function fromV3(
   keystore: string,

@@ -27,7 +27,6 @@
     <!-- SCRIPT -->
     <script nonce="$scriptNonce">
         var ipcRenderer = require('electron').ipcRenderer;
-        var remote = require('electron').remote;
         var body = document.querySelector('body');
         var input = document.querySelector('.passphrase-input');
         var unlock = document.querySelector('.passphrase-unlock');
@@ -52,7 +51,6 @@
         unlock.addEventListener('click', unlockWithPassphrase);
 
         close.addEventListener('click', function () {
-            var window = remote.getCurrentWindow();
             window.close();
         });
     </script>

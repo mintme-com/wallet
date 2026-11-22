@@ -1,5 +1,5 @@
-export { IWallet, IReadOnlyWallet, IFullWallet } from './IWallet';
-export { Balance } from './balance';
-export { WalletConfig } from './config';
+export * from './IWallet';
+export * from './balance';
+export * from './config';
 export * from './deterministic';
 export * from './non-deterministic';

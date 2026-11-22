@@ -6,6 +6,9 @@ npm-debug.log*
 
 # Build
 dist
+dist-electron
+common/dist-electron
+release
 
 # Runtime data
 pids
