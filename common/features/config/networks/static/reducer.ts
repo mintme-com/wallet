@@ -50,6 +50,28 @@ import {
 } from 'config/dpaths';
 import { makeExplorer } from 'utils/helpers';
 import * as types from './types';
+import ethTokens from 'config/tokens/eth.json';
+import ethContracts from 'config/contracts/eth.json';
+import ropstenTokens from 'config/tokens/ropsten.json';
+import ropstenContracts from 'config/contracts/ropsten.json';
+import rinkebyTokens from 'config/tokens/rinkeby.json';
+import rinkebyContracts from 'config/contracts/rinkeby.json';
+import etcTokens from 'config/tokens/etc.json';
+import etcContracts from 'config/contracts/etc.json';
+import ubqTokens from 'config/tokens/ubq.json';
+import ubqContracts from 'config/contracts/ubq.json';
+import expTokens from 'config/tokens/exp.json';
+import expContracts from 'config/contracts/exp.json';
+import ellaTokens from 'config/tokens/ella.json';
+import rskTokens from 'config/tokens/rsk.json';
+import rskContracts from 'config/contracts/rsk.json';
+import rskTestnetTokens from 'config/tokens/rsk_testnet.json';
+import rskTestnetContracts from 'config/contracts/rsk_testnet.json';
+import esnTokens from 'config/tokens/esn.json';
+import esnContracts from 'config/contracts/esn.json';
+import pirlContracts from 'config/contracts/pirl.json';
+import webTokens from 'config/tokens/web.json';
+import webContracts from 'config/contracts/web.json';
 
 const testnetDefaultGasPrice = {
   min: 0.1,
@@ -73,8 +95,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: ethPlorer,
       address: ETHTokenExplorer
     },
-    tokens: require('config/tokens/eth.json'),
-    contracts: require('config/contracts/eth.json'),
+    tokens: ethTokens,
+    contracts: ethContracts,
     dPathFormats: {
       [SecureWalletName.TREZOR]: ETH_TREZOR,
       [SecureWalletName.SAFE_T]: ETH_SAFE_T,
@@ -95,8 +117,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'Etherscan',
       origin: 'https://ropsten.etherscan.io'
     }),
-    tokens: require('config/tokens/ropsten.json'),
-    contracts: require('config/contracts/ropsten.json'),
+    tokens: ropstenTokens,
+    contracts: ropstenContracts,
     isTestnet: true,
     dPathFormats: {
       [SecureWalletName.TREZOR]: ETH_TESTNET,
@@ -117,8 +139,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'Etherscan',
       origin: 'https://kovan.etherscan.io'
     }),
-    tokens: require('config/tokens/ropsten.json'),
-    contracts: require('config/contracts/ropsten.json'),
+    tokens: ropstenTokens,
+    contracts: ropstenContracts,
     isTestnet: true,
     dPathFormats: {
       [SecureWalletName.TREZOR]: ETH_TESTNET,
@@ -139,8 +161,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'Etherscan',
       origin: 'https://rinkeby.etherscan.io'
     }),
-    tokens: require('config/tokens/rinkeby.json'),
-    contracts: require('config/contracts/rinkeby.json'),
+    tokens: rinkebyTokens,
+    contracts: rinkebyContracts,
     isTestnet: true,
     dPathFormats: {
       [SecureWalletName.TREZOR]: ETH_TESTNET,
@@ -184,8 +206,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       origin: 'https://blockscout.com/etc/mainnet',
       addressPath: 'address'
     }),
-    tokens: require('config/tokens/etc.json'),
-    contracts: require('config/contracts/etc.json'),
+    tokens: etcTokens,
+    contracts: etcContracts,
     dPathFormats: {
       [SecureWalletName.TREZOR]: ETC_TREZOR,
       [SecureWalletName.SAFE_T]: ETC_SAFE_T,
@@ -209,8 +231,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'Ubiqscan',
       origin: 'https://ubiqscan.io'
     }),
-    tokens: require('config/tokens/ubq.json'),
-    contracts: require('config/contracts/ubq.json'),
+    tokens: ubqTokens,
+    contracts: ubqContracts,
     dPathFormats: {
       [SecureWalletName.TREZOR]: UBQ_DEFAULT,
       [SecureWalletName.SAFE_T]: UBQ_DEFAULT,
@@ -234,8 +256,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'Gander',
       origin: 'https://www.gander.tech'
     }),
-    tokens: require('config/tokens/exp.json'),
-    contracts: require('config/contracts/exp.json'),
+    tokens: expTokens,
+    contracts: expContracts,
     dPathFormats: {
       [SecureWalletName.TREZOR]: EXP_DEFAULT,
       [SecureWalletName.SAFE_T]: EXP_DEFAULT,
@@ -312,7 +334,7 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'Ellaism Explorer',
       origin: 'https://explorer.ellaism.io'
     }),
-    tokens: require('config/tokens/ella.json'),
+    tokens: ellaTokens,
     contracts: [],
     dPathFormats: {
       [SecureWalletName.TREZOR]: ELLA_DEFAULT,
@@ -465,8 +487,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'RSK Explorer',
       origin: 'https://explorer.rsk.co'
     }),
-    tokens: require('config/tokens/rsk.json'),
-    contracts: require('config/contracts/rsk.json'),
+    tokens: rskTokens,
+    contracts: rskContracts,
     isTestnet: false,
     dPathFormats: {
       [SecureWalletName.TREZOR]: RSK_MAINNET,
@@ -493,8 +515,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'RSK Testnet Explorer',
       origin: 'https://explorer.testnet.rsk.co'
     }),
-    tokens: require('config/tokens/rsk_testnet.json'),
-    contracts: require('config/contracts/rsk_testnet.json'),
+    tokens: rskTestnetTokens,
+    contracts: rskTestnetContracts,
     isTestnet: true,
     dPathFormats: {
       [SecureWalletName.TREZOR]: RSK_TESTNET,
@@ -598,8 +620,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'ESN Explorer',
       origin: 'https://ethersocial.net'
     }),
-    tokens: require('config/tokens/esn.json'),
-    contracts: require('config/contracts/esn.json'),
+    tokens: esnTokens,
+    contracts: esnContracts,
     dPathFormats: {
       [SecureWalletName.TREZOR]: ESN_DEFAULT,
       [SecureWalletName.SAFE_T]: ESN_DEFAULT,
@@ -672,7 +694,7 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       origin: 'https://devexplorer.pirl.io'
     }),
     tokens: [],
-    contracts: require('config/contracts/pirl.json'),
+    contracts: pirlContracts,
     dPathFormats: {
       [SecureWalletName.TREZOR]: PIRL_DEFAULT,
       [SecureWalletName.LEDGER_NANO_S]: PIRL_DEFAULT,
@@ -870,8 +892,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: types.ConfigStaticNetworksState = {
       name: 'MintMe Explorer',
       origin: 'https://mintme.com/explorer'
     }),
-    tokens: require('config/tokens/web.json'),
-    contracts: require('config/contracts/web.json'),
+    tokens: webTokens,
+    contracts: webContracts,
     dPathFormats: {
       [InsecureWalletName.MNEMONIC_PHRASE]: WEB_DEFAULT
     },

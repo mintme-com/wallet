@@ -4,8 +4,9 @@ import packageJson from '../../package.json';
 import { GasPriceSetting } from 'types/network';
 import { makeExplorer } from 'utils/helpers';
 import translate from 'translations';
+import languagesJson from './languages.json';
 
-export const languages = require('./languages.json');
+export const languages = languagesJson;
 export const discordURL = 'https://discord.gg/VSaTXEA';
 
 // Displays in the footer

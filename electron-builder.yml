@@ -1,0 +1,14 @@
+appId: com.mintme.wallet
+productName: MintMe Coin Wallet
+directories:
+  output: release
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - package.json
+extraMetadata:
+  main: dist-electron/main.js
+linux:
+  target:
+    - AppImage
+  category: Finance

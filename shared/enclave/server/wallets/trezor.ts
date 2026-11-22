@@ -10,7 +10,7 @@ import { showPinPrompt } from '../views/pin';
 import { showPassphrasePrompt } from '../views/passphrase';
 import config from './msg-config';
 
-const deviceList = new DeviceList({ config });
+let deviceList: DeviceList | null;
 
 // Keep session in memory so that we're not constantly re-acquiring
 // Null it out if session is grabbed somewhere else first
@@ -20,6 +20,9 @@ async function getSession() {
     return currentSession;
   }
 
+  if (!deviceList) {
+    deviceList = new DeviceList({ config });
+  }
   const { device, session } = await deviceList.acquireFirstDevice(true);
   device.on('disconnect', () => (currentSession = null));
   device.on('changedSessions', (_, isUsedHere) => {

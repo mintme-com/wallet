@@ -7,61 +7,63 @@
 
 ## Development / Build Requirements
 
-* Node 10.13.0\*
-* Yarn >= 1.7.0\*\*
-* Python 2.7.X\*\*\*
+* Node 24 LTS (recommended) or Node 22 LTS
+* Yarn 1.22.x
+* Python 3 and a C/C++ build toolchain when a native module needs to be compiled
 
-<sub>\*Higher versions should work fine, but may cause inconsistencies. It's suggested you run 8.16.0 using `nvm`.</sub>
-<br/>
-<sub>**npm is NOT supported for package management. MintMe Wallet uses yarn.lock to ensure sub-dependency versions are pinned, so yarn is required to install node_modules</sub>
-<br/>
-<sub>\***Python 3 is **not** supported, since our dependencies use `node-gyp`.</sub>
-<br/>
-<sub>\***For users trying to build with WSL, you'll need to have install libpng via `sudo apt-get install libpng16-dev`.</sub>
+The `.nvmrc` file selects Node 24. With `nvm`, run `nvm use` before installing the dependencies. Node 26 is temporarily excluded because the Electron 33 installer does not reliably extract its binary with that Node version.
+
+npm is not supported for package management. The `yarn.lock` file pins the dependency tree. On Linux, building `node-hid` from source may also require the development packages for `libusb` and `libudev`.
 
 ## Running the App
 
-First, you must run `yarn` to grab all the dependencies. If you are ever having trouble with something, a good place to start is by trying `rm -rf node_modules/ && yarn` which will completely clear all your previously installs dependencies and re-install them from scratch.
+Install the dependencies with:
 
-Then, you can run various commands depending on what you want to do:
+```bash
+yarn install
+```
+
+The postinstall step downloads Electron and rebuilds its native dependencies. To reinstall from scratch, remove `node_modules` and run `yarn install` again using a supported Node version.
 
 #### Development
 
 ```bash
-# run app in dev mode in browser, rebuild on file changes
+# browser development server with hot reload
 yarn start
 ```
-A development server will be available on https://localhost:3000
-If you're using Chrome, you will get a `net::ERR_CERT_AUTHORITY_INVALID` warning.
-To disable it you can your settings in chrome: chrome://flags/#allow-insecure-localhost
 
+The development server is available at http://localhost:3000.
 
 ```bash
-# run app in dev mode in electron, rebuild on file changes
+# Electron development mode with hot reload
 yarn dev:electron
 ```
+
+DevTools are not opened by default. Set `ELECTRON_OPEN_DEVTOOLS=1` when running `dev:electron` to open them.
 
 #### Build Releases
 
 ```bash
-# builds the production server app
+# production web app in dist/
 yarn build
-```
 
-```bash
-# builds the downloadable version of the site
+# downloadable web app in dist/
 yarn build:downloadable
-```
 
-```bash
-# builds the electron apps
+# Electron renderer and process bundles in dist/ and dist-electron/,
+# followed by the desktop packages in release/
 yarn build:electron
 
-# builds only one OS's electron app
-yarn build:electron:(osx|linux|windows)
+# build packages for one operating system
+yarn build:electron:linux
+yarn build:electron:osx
+yarn build:electron:windows
+
+# build only the unpacked Linux executable, without an AppImage
+yarn build:electron:linux:dir
 ```
 
-All of these builds are output to a folder in `dist/`.
+The unpacked Linux executable is written to `release/linux-unpacked/mintmecoinwallet`. The packaged Linux build produces an AppImage in `release/`. The `dist`, `dist-electron` and `release` directories are generated artifacts and are intentionally ignored by Git.
 
 #### Unit Tests:
 
@@ -132,14 +134,18 @@ yarn test:int
 │   ├── translations - Language JSON dictionaries
 │   ├── typescript - Typescript definition files
 │   ├── utils - Common use utility functions
-│   ├── index.tsx - Entry point for app
-│   ├── index.html - Html template file for html-webpack-plugin
+│   ├── index.tsx - Renderer entry point
+│   ├── index.html - Vite HTML template
 │   ├── Root.tsx - Root component for React
-├── electron-app - Code for the native electron app
+├── electron-app - Legacy Electron code retained for reference; not the active entry point
 ├── jest_config - Jest testing configuration
 ├── spec - Jest unit tests, mirror's common's structure
-├── static - Files that don't get compiled, just moved to build
-└── webpack_config - Webpack configuration
+├── static - Files copied directly to the build
+├── main.ts - Active Electron main-process entry point
+├── preload.ts - Restricted IPC bridge exposed to the renderer
+├── vite.config.ts - Web and Electron build configuration
+├── electron-builder.yml - Desktop packaging configuration
+└── webpack_config - Legacy Webpack configuration; no longer used by the build scripts
 ```
 
 ## Typescript Resources:

@@ -2,6 +2,27 @@ import React from 'react';
 import { ConfigState } from 'features/config/types';
 import { loadStatePropertyOrEmptyObject } from 'utils/localStorage';
 import TranslateMarkdown from 'components/Translate';
+import en from './lang/en.json';
+import de from './lang/de.json';
+import el from './lang/el.json';
+import es from './lang/es.json';
+import fi from './lang/fi.json';
+import fr from './lang/fr.json';
+import ht from './lang/ht.json';
+import hu from './lang/hu.json';
+import id from './lang/id.json';
+import it from './lang/it.json';
+import ja from './lang/ja.json';
+import nl from './lang/nl.json';
+import no from './lang/no.json';
+import pl from './lang/pl.json';
+import pt from './lang/pt.json';
+import ru from './lang/ru.json';
+import ko from './lang/ko.json';
+import tr from './lang/tr.json';
+import vi from './lang/vi.json';
+import zhcn from './lang/zhcn.json';
+import zhtw from './lang/zhtw.json';
 
 const fallbackLanguage = 'en';
 const repository: {
@@ -18,27 +39,27 @@ interface ILanguage {
 }
 
 const languages: ILanguage[] = [
-  require('./lang/en.json'),
-  require('./lang/de.json'),
-  require('./lang/el.json'),
-  require('./lang/es.json'),
-  require('./lang/fi.json'),
-  require('./lang/fr.json'),
-  require('./lang/ht.json'),
-  require('./lang/hu.json'),
-  require('./lang/id.json'),
-  require('./lang/it.json'),
-  require('./lang/ja.json'),
-  require('./lang/nl.json'),
-  require('./lang/no.json'),
-  require('./lang/pl.json'),
-  require('./lang/pt.json'),
-  require('./lang/ru.json') /*sk, sl, sv */,
-  require('./lang/ko.json'),
-  require('./lang/tr.json'),
-  require('./lang/vi.json'),
-  require('./lang/zhcn.json'),
-  require('./lang/zhtw.json')
+  en,
+  de,
+  el,
+  es,
+  fi,
+  fr,
+  ht,
+  hu,
+  id,
+  it,
+  ja,
+  nl,
+  no,
+  pl,
+  pt,
+  ru /*sk, sl, sv */,
+  ko,
+  tr,
+  vi,
+  zhcn,
+  zhtw
 ];
 
 languages.forEach(l => {
